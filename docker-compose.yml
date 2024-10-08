@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: case_study_management
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app_network
+
+  app:
+    build: .
+    container_name: node_app
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server.js:/app/server.js
+      - ./package.json:/app/package.json
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: case_study_management
+    networks:
+      - app_network
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    networks:
+      - app_network
+    restart: always
+
+  migrations:
+    image: node:14
+    container_name: migration_container
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["sh", "-c", "npm install sequelize sequelize-cli mysql2 && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"]
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: case_study_management
+    networks:
+      - app_network
+
+volumes:
+  db_data:
+
+networks:
+  app_network:

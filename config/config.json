@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "user",
+    "password": "password",
+    "database": "case_study_management",
+    "host": "db",
+    "dialect": "mysql"
+  }
+}
