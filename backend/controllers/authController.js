@@ -1,3 +1,5 @@
+const db = require('../db/db');
+
 const register =  async (req, res) => {
     const { email_or_username, password } = req.body;
   
@@ -19,15 +21,15 @@ const register =  async (req, res) => {
       console.error('Fehler beim Hashen des Passworts:', error);
       res.status(500).send('Serverfehler');
     }
-  };
+};
 
 const login = async (req, res) => {
     const { email_or_username, password } = req.body;
-    
+
     if (!email_or_username || !password) {
         return res.status(400).send('E-Mail/Benutzername und Passwort sind erforderlich');
     }
-    
+
     try {
         const query = 'SELECT password FROM editors WHERE email_or_username = ?';
         db.query(query, [email_or_username], async (err, results) => {
@@ -49,6 +51,6 @@ const login = async (req, res) => {
         console.error('Fehler beim Verarbeiten des Logins:', error);
         res.status(500).send('Serverfehler');
     }
-    };
+};
 
-    module.exports = { login, register }
+module.exports = { login, register }

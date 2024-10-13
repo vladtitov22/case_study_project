@@ -47,7 +47,7 @@
                     class="case-study-item"
                   >
                     <div class="case-study-content">
-                      <p><strong>Logo:</strong> {{ caseStudy.logo }}</p>
+                      <img :src="`http://localhost:3000/${caseStudy.image}`" alt="case study image" />
                       <p><strong>Titel:</strong> {{ caseStudy.title }}</p>
                       <p><strong>Beschreibung:</strong> {{ caseStudy.description }}</p>
                     </div>
