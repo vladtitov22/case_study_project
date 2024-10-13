@@ -1,5 +1,5 @@
 
-const db = require('../db/db');
+const db = require('../databaseconfig/db');
 
 const createCase = (req, res) => {
   const { title, description, customer_id } = req.body;

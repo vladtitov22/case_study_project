@@ -1,5 +1,5 @@
 
-const db = require('../db/db');
+const db = require('../databaseconfig/db');
 
 const createClient =   (req, res) => {
     const { name, status } = req.body;
