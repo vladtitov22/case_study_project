@@ -34,8 +34,6 @@ export default {
       this.$router.push('/dashboard/editor/casemanagement');
     },
     logout() {
-      // Löschen der Benutzerdaten und Weiterleitung zur Startseite
-      localStorage.removeItem('authToken');
       this.$router.push('/');
     },
   },

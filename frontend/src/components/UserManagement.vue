@@ -171,8 +171,6 @@ export default {
       }
     },
     logout() {
-      // Benutzerdaten löschen und zur Login-Seite navigieren
-      localStorage.removeItem('authToken');
       this.$router.push('/');
     },
   },
