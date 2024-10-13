@@ -18,7 +18,7 @@
           >
             <div @click="toggleClientCases(client.id)" class="client-overview">
               <img
-                :src="client.logo"
+               :src="`http://localhost:3000/${client.logo}`"
                 alt="Kundenlogo"
                 class="client-logo"
               />
@@ -50,7 +50,6 @@
                       <p><strong>Logo:</strong> {{ caseStudy.logo }}</p>
                       <p><strong>Titel:</strong> {{ caseStudy.title }}</p>
                       <p><strong>Beschreibung:</strong> {{ caseStudy.description }}</p>
-                      <p><strong>Bild:</strong> {{ caseStudy.image }}</p>
                     </div>
                   </li>
                 </ul>

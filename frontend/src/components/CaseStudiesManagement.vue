@@ -213,14 +213,7 @@ export default {
       };
     },
     logout() {
-      apiClient.post('/logout')
-        .then(() => {
-          alert('Erfolgreich abgemeldet!');
-          this.$router.push('/'); // Weiterleitung zur Hauptseite
-        })
-        .catch(error => {
-          console.error('Fehler beim Abmelden:', error);
-        });
+          this.$router.push('/');
     },
   },
 };
